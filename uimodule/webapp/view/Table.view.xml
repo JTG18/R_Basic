@@ -1,0 +1,755 @@
+<mvc:View 
+    controllerName="roehm.jt.mockup.mockup.controller.Table" 
+    xmlns:mvc="sap.ui.core.mvc" 
+    xmlns:l="sap.ui.layout" 
+    xmlns:core="sap.ui.core" 
+    xmlns:fb="sap.ui.comp.filterbar" 
+    xmlns:t="sap.ui.table" 
+    displayBlock="true" 
+    xmlns="sap.m">
+    <Page id="table" title="">
+        <headerContent>
+            <Button text="Filter" icon="sap-icon://filter" press="onOpenFilterDialog"></Button>
+            <Button text="Layout" icon="sap-icon://grid" press="onOpenLayoutDialog"></Button>
+        </headerContent>
+        <content>
+            <!-- 1: Prozessauftrag Übersicht -->
+            <t:Table
+                id="table1"
+                rows="{path: 'TableOne>/'}"
+                selectionMode="Single"
+                selectionBehavior="RowOnly"
+                enableSelectAll="false"
+                visibleRowCountMode="Interactive"
+                visibleRowCount="5"
+                visible="{layoutModel>/t1}"
+                ariaLabelledBy="title">
+                <t:extension>
+                    <OverflowToolbar>
+                        <Title text="Prozessauftrag Übersicht"/>
+                        <ToolbarSpacer/>
+                        <!-- <Button text="Spalten konfigurieren" press="onColumnPicker"></Button> -->
+                    </OverflowToolbar>
+                </t:extension>
+                <t:columns>
+                    <t:Column sortProperty="Eckstart" filterProperty="Eckstart">
+                        <Label text="Eckstart" />
+                        <t:template>
+                            <Text text="{TableOne>Eckstart}" wrapping="false" />
+                        </t:template>
+                    </t:Column>
+                    <t:Column >
+                        <Label text="Eckend" />
+                        <t:template>
+                            <Text text="{TableOne>Eckend}" wrapping="false" />
+                        </t:template>
+                    </t:Column>
+                    <t:Column >
+                        <Label text="Art" />
+                        <t:template>
+                            <Text text="{TableOne>Art}" wrapping="false" />
+                        </t:template>
+                    </t:Column>
+                    <t:Column sortProperty="Material" filterProperty="Material">
+                        <Label text="Material"/>
+                        <t:template>
+                            <Text text="{TableOne>Material}" wrapping="false" />
+                        </t:template>
+                    </t:Column>
+                    <t:Column >
+                        <Label text="Auftrag" />
+                        <t:template>
+                            <Text text="{TableOne>Auftrag}" wrapping="false" />
+                        </t:template>
+                    </t:Column>
+                    <t:Column >
+                        <Label text="Sollmenge" />
+                        <t:template>
+                            <Text text="{TableOne>Sollmenge}" wrapping="false" />
+                        </t:template>
+                    </t:Column>
+                    <t:Column >
+                        <Label text="Verpackungstyp" />
+                        <t:template>
+                            <Text text="{TableOne>Verpackungstyp}" wrapping="false" />
+                        </t:template>
+                    </t:Column>
+                    <t:Column >
+                        <Label text="Kundenauftrag" />
+                        <t:template>
+                            <Text text="{TableOne>Kundenauftrag}" wrapping="false" />
+                        </t:template>
+                    </t:Column>
+                </t:columns>
+            </t:Table>
+            <Toolbar visible="{layoutModel>/t1}" width="100%" height="15px"/>
+
+            <!-- 2: Prozessauftrag Details -->
+            <t:Table
+                id="table2"
+                visible="{layoutModel>/t2}"
+                rows="{path: 'TableOne>/'}"
+                selectionMode="Single"
+                selectionBehavior="RowOnly"
+                enableSelectAll="false"
+                visibleRowCountMode="Interactive"
+                visibleRowCount="5"
+                ariaLabelledBy="title">
+                <t:extension>
+                    <OverflowToolbar>
+                        <Title text="Prozessauftrag Details"/>
+                        <ToolbarSpacer/>
+                        <!-- <Button text="Spalten konfigurieren" press="onColumnPicker"></Button> -->
+                    </OverflowToolbar>
+                </t:extension>
+                <t:columns>
+                    <t:Column >
+                        <Label text="Eckstart" />
+                        <t:template>
+                            <Text text="{TableOne>Eckstart}" wrapping="false" />
+                        </t:template>
+                    </t:Column>
+                    <t:Column >
+                        <Label text="Eckend" />
+                        <t:template>
+                            <Text text="{TableOne>Eckend}" wrapping="false" />
+                        </t:template>
+                    </t:Column>
+                    <t:Column >
+                        <Label text="Art" />
+                        <t:template>
+                            <Text text="{TableOne>Art}" wrapping="false" />
+                        </t:template>
+                    </t:Column>
+                    <t:Column >
+                        <Label text="Material" />
+                        <t:template>
+                            <Text text="{TableOne>Material}" wrapping="false" />
+                        </t:template>
+                    </t:Column>
+                    <t:Column >
+                        <Label text="Auftrag" />
+                        <t:template>
+                            <Text text="{TableOne>Auftrag}" wrapping="false" />
+                        </t:template>
+                    </t:Column>
+                    <t:Column >
+                        <Label text="Sollmenge" />
+                        <t:template>
+                            <Text text="{TableOne>Sollmenge}" wrapping="false" />
+                        </t:template>
+                    </t:Column>
+                    <t:Column >
+                        <Label text="Verpackungstyp" />
+                        <t:template>
+                            <Text text="{TableOne>Verpackungstyp}" wrapping="false" />
+                        </t:template>
+                    </t:Column>
+                    <t:Column >
+                        <Label text="Kundenauftrag" />
+                        <t:template>
+                            <Text text="{TableOne>Kundenauftrag}" wrapping="false" />
+                        </t:template>
+                    </t:Column>
+                </t:columns>
+            </t:Table>
+            <Toolbar width="100%" height="15px"
+            visible="{layoutModel>/t2}"/>
+
+            
+            <!-- 3: Prozessauftrag Vorgangsdetails && Stückliste zum Auftrag -->
+            <HBox visible="{layoutModel>/t3}">
+                <VBox class="sapUiLargeMarginEnd" width="50%" >
+                    <t:Table
+                        id="table3a"
+                        rows="{path: 'TableOne>/'}"
+                        selectionMode="Single"
+                        selectionBehavior="RowOnly"
+                        enableSelectAll="false"
+                        visibleRowCountMode="Interactive"
+                        visibleRowCount="5"
+                        ariaLabelledBy="title">
+                        <t:extension>
+                            <OverflowToolbar>
+                                <Title text="Prozessauftrag Vorgangsdetails"/>
+                                <ToolbarSpacer/>
+                                <!-- <Button text="Spalten konfigurieren" press="onColumnPicker"></Button> -->
+                            </OverflowToolbar>
+                        </t:extension>
+                        <t:columns>
+                            <t:Column >
+                                <Label text="Eckstart" />
+                                <t:template>
+                                    <Text text="{TableOne>Eckstart}" wrapping="false" />
+                                </t:template>
+                            </t:Column>
+                            <t:Column >
+                                <Label text="Eckend" />
+                                <t:template>
+                                    <Text text="{TableOne>Eckend}" wrapping="false" />
+                                </t:template>
+                            </t:Column>
+                            <t:Column >
+                                <Label text="Art" />
+                                <t:template>
+                                    <Text text="{TableOne>Art}" wrapping="false" />
+                                </t:template>
+                            </t:Column>
+                            <t:Column >
+                                <Label text="Material" />
+                                <t:template>
+                                    <Text text="{TableOne>Material}" wrapping="false" />
+                                </t:template>
+                            </t:Column>
+                            <t:Column >
+                                <Label text="Auftrag" />
+                                <t:template>
+                                    <Text text="{TableOne>Auftrag}" wrapping="false" />
+                                </t:template>
+                            </t:Column>
+                            <t:Column >
+                                <Label text="Sollmenge" />
+                                <t:template>
+                                    <Text text="{TableOne>Sollmenge}" wrapping="false" />
+                                </t:template>
+                            </t:Column>
+                            <t:Column >
+                                <Label text="Verpackungstyp" />
+                                <t:template>
+                                    <Text text="{TableOne>Verpackungstyp}" wrapping="false" />
+                                </t:template>
+                            </t:Column>
+                            <t:Column >
+                                <Label text="Kundenauftrag" />
+                                <t:template>
+                                    <Text text="{TableOne>Kundenauftrag}" wrapping="false" />
+                                </t:template>
+                            </t:Column>
+                        </t:columns>
+                    </t:Table>
+                </VBox>
+                <VBox width="50%">
+                    <t:Table
+                        id="table3b"
+                        rows="{path: 'TableOne>/'}"
+                        selectionMode="Single"
+                        selectionBehavior="RowOnly"
+                        enableSelectAll="false"
+                        visibleRowCountMode="Interactive"
+                        visibleRowCount="5"
+                        ariaLabelledBy="title">
+                        <t:extension>
+                            <OverflowToolbar>
+                                <Title text="Stückliste zum Auftrag"/>
+                                <ToolbarSpacer/>
+                                <!-- <Button text="Spalten konfigurieren" press="onColumnPicker"></Button> -->
+                            </OverflowToolbar>
+                        </t:extension>
+                        <t:columns>
+                            <t:Column >
+                                <Label text="Eckstart" />
+                                <t:template>
+                                    <Text text="{TableOne>Eckstart}" wrapping="false" />
+                                </t:template>
+                            </t:Column>
+                            <t:Column >
+                                <Label text="Eckend" />
+                                <t:template>
+                                    <Text text="{TableOne>Eckend}" wrapping="false" />
+                                </t:template>
+                            </t:Column>
+                            <t:Column >
+                                <Label text="Art" />
+                                <t:template>
+                                    <Text text="{TableOne>Art}" wrapping="false" />
+                                </t:template>
+                            </t:Column>
+                            <t:Column >
+                                <Label text="Material" />
+                                <t:template>
+                                    <Text text="{TableOne>Material}" wrapping="false" />
+                                </t:template>
+                            </t:Column>
+                            <t:Column >
+                                <Label text="Auftrag" />
+                                <t:template>
+                                    <Text text="{TableOne>Auftrag}" wrapping="false" />
+                                </t:template>
+                            </t:Column>
+                            <t:Column >
+                                <Label text="Sollmenge" />
+                                <t:template>
+                                    <Text text="{TableOne>Sollmenge}" wrapping="false" />
+                                </t:template>
+                            </t:Column>
+                            <t:Column >
+                                <Label text="Verpackungstyp" />
+                                <t:template>
+                                    <Text text="{TableOne>Verpackungstyp}" wrapping="false" />
+                                </t:template>
+                            </t:Column>
+                            <t:Column >
+                                <Label text="Kundenauftrag" />
+                                <t:template>
+                                    <Text text="{TableOne>Kundenauftrag}" wrapping="false" />
+                                </t:template>
+                            </t:Column>
+                        </t:columns>
+                    </t:Table>
+                </VBox>
+            </HBox>
+            <Toolbar width="100%" height="15px"
+            visible="{layoutModel>/t3}"/>
+
+
+            <!-- 4: Prozessauftrag Lieferdetails && Prozessauftrag Langtexte -->
+            <HBox
+            visible="{layoutModel>/t4}">
+                <VBox class="sapUiLargeMarginEnd" width="50%" >
+                    <t:Table
+                        id="table4a"
+                        rows="{path: 'TableOne>/'}"
+                        selectionMode="Single"
+                        selectionBehavior="RowOnly"
+                        enableSelectAll="false"
+                        visibleRowCountMode="Interactive"
+                        visibleRowCount="5"
+                        ariaLabelledBy="title">
+                        <t:extension>
+                            <OverflowToolbar>
+                                <Title text="Prozessauftrag Lieferdetails"/>
+                                <ToolbarSpacer/>
+                                <!-- <Button text="Spalten konfigurieren" press="onColumnPicker"></Button> -->
+                            </OverflowToolbar>
+                        </t:extension>
+                        <t:columns>
+                            <t:Column >
+                                <Label text="Eckstart" />
+                                <t:template>
+                                    <Text text="{TableOne>Eckstart}" wrapping="false" />
+                                </t:template>
+                            </t:Column>
+                            <t:Column >
+                                <Label text="Eckend" />
+                                <t:template>
+                                    <Text text="{TableOne>Eckend}" wrapping="false" />
+                                </t:template>
+                            </t:Column>
+                            <t:Column >
+                                <Label text="Art" />
+                                <t:template>
+                                    <Text text="{TableOne>Art}" wrapping="false" />
+                                </t:template>
+                            </t:Column>
+                            <t:Column >
+                                <Label text="Material" />
+                                <t:template>
+                                    <Text text="{TableOne>Material}" wrapping="false" />
+                                </t:template>
+                            </t:Column>
+                            <t:Column >
+                                <Label text="Auftrag" />
+                                <t:template>
+                                    <Text text="{TableOne>Auftrag}" wrapping="false" />
+                                </t:template>
+                            </t:Column>
+                            <t:Column >
+                                <Label text="Sollmenge" />
+                                <t:template>
+                                    <Text text="{TableOne>Sollmenge}" wrapping="false" />
+                                </t:template>
+                            </t:Column>
+                            <t:Column >
+                                <Label text="Verpackungstyp" />
+                                <t:template>
+                                    <Text text="{TableOne>Verpackungstyp}" wrapping="false" />
+                                </t:template>
+                            </t:Column>
+                            <t:Column >
+                                <Label text="Kundenauftrag" />
+                                <t:template>
+                                    <Text text="{TableOne>Kundenauftrag}" wrapping="false" />
+                                </t:template>
+                            </t:Column>
+                        </t:columns>
+                    </t:Table>
+                </VBox>
+                <VBox width="50%">
+                    <OverflowToolbar class="sapUiTinyMarginBottom">
+                        <Title text="Prozessauftrag Langtexte"/>
+                    </OverflowToolbar>
+                    <Text
+                        id="text4"
+                        wrappingType="Hyphenated"
+                        class="sapUiSmallMarginEnd sapUiSmallMarginBottom"
+                        text="{page>/textData}" />
+                </VBox>
+            </HBox>
+            <Toolbar width="100%" height="15px"
+            visible="{layoutModel>/t4}"/>
+
+
+            <!-- 5: Auftragscontrolling Aufträge-->
+            <t:Table
+                id="table5"
+                visible="{layoutModel>/t5}"
+                rows="{path: 'TableOne>/'}"
+                selectionMode="Single"
+                selectionBehavior="RowOnly"
+                enableSelectAll="false"
+                visibleRowCountMode="Interactive"
+                visibleRowCount="3"
+                ariaLabelledBy="title">
+                <t:extension>
+                    <OverflowToolbar>
+                        <Title text="Auftragscontrolling Aufträge"/>
+                        <ToolbarSpacer/>
+                        <!-- <Button text="Spalten konfigurieren" press="onColumnPicker"></Button> -->
+                    </OverflowToolbar>
+                </t:extension>
+                <t:columns>
+                    <t:Column >
+                        <Label text="Eckstart" />
+                        <t:template>
+                            <Text text="{TableOne>Eckstart}" wrapping="false" />
+                        </t:template>
+                    </t:Column>
+                    <t:Column >
+                        <Label text="Eckend" />
+                        <t:template>
+                            <Text text="{TableOne>Eckend}" wrapping="false" />
+                        </t:template>
+                    </t:Column>
+                    <t:Column >
+                        <Label text="Art" />
+                        <t:template>
+                            <Text text="{TableOne>Art}" wrapping="false" />
+                        </t:template>
+                    </t:Column>
+                    <t:Column >
+                        <Label text="Material" />
+                        <t:template>
+                            <Text text="{TableOne>Material}" wrapping="false" />
+                        </t:template>
+                    </t:Column>
+                    <t:Column >
+                        <Label text="Auftrag" />
+                        <t:template>
+                            <Text text="{TableOne>Auftrag}" wrapping="false" />
+                        </t:template>
+                    </t:Column>
+                    <t:Column >
+                        <Label text="Sollmenge" />
+                        <t:template>
+                            <Text text="{TableOne>Sollmenge}" wrapping="false" />
+                        </t:template>
+                    </t:Column>
+                    <t:Column >
+                        <Label text="Verpackungstyp" />
+                        <t:template>
+                            <Text text="{TableOne>Verpackungstyp}" wrapping="false" />
+                        </t:template>
+                    </t:Column>
+                    <t:Column >
+                        <Label text="Kundenauftrag" />
+                        <t:template>
+                            <Text text="{TableOne>Kundenauftrag}" wrapping="false" />
+                        </t:template>
+                    </t:Column>
+                </t:columns>
+            </t:Table>
+            <Toolbar width="100%" height="15px"
+            visible="{layoutModel>/t5}"/>
+
+
+            <!-- 6: Auftragscontrolling Summen-->
+            <t:Table
+                id="table6"
+                visible="{layoutModel>/t6}"
+                rows="{path: 'TableOne>/'}"
+                selectionMode="Single"
+                selectionBehavior="RowOnly"
+                enableSelectAll="false"
+                visibleRowCountMode="Interactive"
+                visibleRowCount="3"
+                ariaLabelledBy="title">
+                <t:extension>
+                    <OverflowToolbar>
+                        <Title text="Auftragscontrolling Summen"/>
+                        <ToolbarSpacer/>
+                        <!-- <Button text="Spalten konfigurieren" press="onColumnPicker"></Button> -->
+                    </OverflowToolbar>
+                </t:extension>
+                <t:columns>
+                    <t:Column >
+                        <Label text="Eckstart" />
+                        <t:template>
+                            <Text text="{TableOne>Eckstart}" wrapping="false" />
+                        </t:template>
+                    </t:Column>
+                    <t:Column >
+                        <Label text="Eckend" />
+                        <t:template>
+                            <Text text="{TableOne>Eckend}" wrapping="false" />
+                        </t:template>
+                    </t:Column>
+                    <t:Column >
+                        <Label text="Art" />
+                        <t:template>
+                            <Text text="{TableOne>Art}" wrapping="false" />
+                        </t:template>
+                    </t:Column>
+                    <t:Column >
+                        <Label text="Material" />
+                        <t:template>
+                            <Text text="{TableOne>Material}" wrapping="false" />
+                        </t:template>
+                    </t:Column>
+                    <t:Column >
+                        <Label text="Auftrag" />
+                        <t:template>
+                            <Text text="{TableOne>Auftrag}" wrapping="false" />
+                        </t:template>
+                    </t:Column>
+                    <t:Column >
+                        <Label text="Sollmenge" />
+                        <t:template>
+                            <Text text="{TableOne>Sollmenge}" wrapping="false" />
+                        </t:template>
+                    </t:Column>
+                    <t:Column >
+                        <Label text="Verpackungstyp" />
+                        <t:template>
+                            <Text text="{TableOne>Verpackungstyp}" wrapping="false" />
+                        </t:template>
+                    </t:Column>
+                    <t:Column >
+                        <Label text="Kundenauftrag" />
+                        <t:template>
+                            <Text text="{TableOne>Kundenauftrag}" wrapping="false" />
+                        </t:template>
+                    </t:Column>
+                </t:columns>
+            </t:Table>
+            <Toolbar width="100%" height="15px"
+            visible="{layoutModel>/t6}"/>
+
+
+            <!-- 7: Prozessauftrag / Kampagne Einarbeitungsmatrix-->
+            <t:Table
+                id="table7"
+                visible="{layoutModel>/t7}"
+                rows="{path: 'TableOne>/'}"
+                selectionMode="Single"
+                selectionBehavior="RowOnly"
+                enableSelectAll="false"
+                visibleRowCountMode="Interactive"
+                visibleRowCount="3"
+                ariaLabelledBy="title">
+                <t:extension>
+                    <OverflowToolbar>
+                        <Title text="Prozessauftrag / Kampagne Einarbeitungsmatrix"/>
+                        <ToolbarSpacer/>
+                        <!-- <Button text="Spalten konfigurieren" press="onColumnPicker"></Button> -->
+                    </OverflowToolbar>
+                </t:extension>
+                <t:columns>
+                    <t:Column >
+                        <Label text="Eckstart" />
+                        <t:template>
+                            <Text text="{TableOne>Eckstart}" wrapping="false" />
+                        </t:template>
+                    </t:Column>
+                    <t:Column >
+                        <Label text="Eckend" />
+                        <t:template>
+                            <Text text="{TableOne>Eckend}" wrapping="false" />
+                        </t:template>
+                    </t:Column>
+                    <t:Column >
+                        <Label text="Art" />
+                        <t:template>
+                            <Text text="{TableOne>Art}" wrapping="false" />
+                        </t:template>
+                    </t:Column>
+                    <t:Column >
+                        <Label text="Material" />
+                        <t:template>
+                            <Text text="{TableOne>Material}" wrapping="false" />
+                        </t:template>
+                    </t:Column>
+                    <t:Column >
+                        <Label text="Auftrag" />
+                        <t:template>
+                            <Text text="{TableOne>Auftrag}" wrapping="false" />
+                        </t:template>
+                    </t:Column>
+                    <t:Column >
+                        <Label text="Sollmenge" />
+                        <t:template>
+                            <Text text="{TableOne>Sollmenge}" wrapping="false" />
+                        </t:template>
+                    </t:Column>
+                    <t:Column >
+                        <Label text="Verpackungstyp" />
+                        <t:template>
+                            <Text text="{TableOne>Verpackungstyp}" wrapping="false" />
+                        </t:template>
+                    </t:Column>
+                    <t:Column >
+                        <Label text="Kundenauftrag" />
+                        <t:template>
+                            <Text text="{TableOne>Kundenauftrag}" wrapping="false" />
+                        </t:template>
+                    </t:Column>
+                </t:columns>
+            </t:Table>
+            <Toolbar width="100%" height="15px"
+            visible="{layoutModel>/t7}"/>
+
+
+            <!-- 8: Stückliste zur Kampagne-->
+            <t:Table
+                id="table8"
+                visible="{layoutModel>/t8}"
+                rows="{path: 'TableOne>/'}"
+                selectionMode="Single"
+                selectionBehavior="RowOnly"
+                enableSelectAll="false"
+                visibleRowCountMode="Interactive"
+                visibleRowCount="3"
+                ariaLabelledBy="title">
+                <t:extension>
+                    <OverflowToolbar>
+                        <Title text="Stückliste zur Kampagne"/>
+                        <ToolbarSpacer/>
+                        <!-- <Button text="Spalten konfigurieren" press="onColumnPicker"></Button> -->
+                    </OverflowToolbar>
+                </t:extension>
+                <t:columns>
+                    <t:Column >
+                        <Label text="Eckstart" />
+                        <t:template>
+                            <Text text="{TableOne>Eckstart}" wrapping="false" />
+                        </t:template>
+                    </t:Column>
+                    <t:Column >
+                        <Label text="Eckend" />
+                        <t:template>
+                            <Text text="{TableOne>Eckend}" wrapping="false" />
+                        </t:template>
+                    </t:Column>
+                    <t:Column >
+                        <Label text="Art" />
+                        <t:template>
+                            <Text text="{TableOne>Art}" wrapping="false" />
+                        </t:template>
+                    </t:Column>
+                    <t:Column >
+                        <Label text="Material" />
+                        <t:template>
+                            <Text text="{TableOne>Material}" wrapping="false" />
+                        </t:template>
+                    </t:Column>
+                    <t:Column >
+                        <Label text="Auftrag" />
+                        <t:template>
+                            <Text text="{TableOne>Auftrag}" wrapping="false" />
+                        </t:template>
+                    </t:Column>
+                    <t:Column >
+                        <Label text="Sollmenge" />
+                        <t:template>
+                            <Text text="{TableOne>Sollmenge}" wrapping="false" />
+                        </t:template>
+                    </t:Column>
+                    <t:Column >
+                        <Label text="Verpackungstyp" />
+                        <t:template>
+                            <Text text="{TableOne>Verpackungstyp}" wrapping="false" />
+                        </t:template>
+                    </t:Column>
+                    <t:Column >
+                        <Label text="Kundenauftrag" />
+                        <t:template>
+                            <Text text="{TableOne>Kundenauftrag}" wrapping="false" />
+                        </t:template>
+                    </t:Column>
+                </t:columns>
+            </t:Table>
+            <Toolbar width="100%" height="15px"
+            visible="{layoutModel>/t8}"/>
+
+
+            <!-- 9: Kampagnencontrolling-->
+            <t:Table
+                id="table9"
+                visible="{layoutModel>/t9}"
+                rows="{path: 'TableOne>/'}"
+                selectionMode="Single"
+                selectionBehavior="RowOnly"
+                enableSelectAll="false"
+                visibleRowCountMode="Interactive"
+                visibleRowCount="3"
+                ariaLabelledBy="title">
+                <t:extension>
+                    <OverflowToolbar>
+                        <Title text="Kampagnencontrolling"/>
+                        <ToolbarSpacer/>
+                        <!-- <Button text="Spalten konfigurieren" press="onColumnPicker"></Button> -->
+                    </OverflowToolbar>
+                </t:extension>
+                <t:columns>
+                    <t:Column >
+                        <Label text="Eckstart" />
+                        <t:template>
+                            <Text text="{TableOne>Eckstart}" wrapping="false" />
+                        </t:template>
+                    </t:Column>
+                    <t:Column >
+                        <Label text="Eckend" />
+                        <t:template>
+                            <Text text="{TableOne>Eckend}" wrapping="false" />
+                        </t:template>
+                    </t:Column>
+                    <t:Column >
+                        <Label text="Art" />
+                        <t:template>
+                            <Text text="{TableOne>Art}" wrapping="false" />
+                        </t:template>
+                    </t:Column>
+                    <t:Column >
+                        <Label text="Material" />
+                        <t:template>
+                            <Text text="{TableOne>Material}" wrapping="false" />
+                        </t:template>
+                    </t:Column>
+                    <t:Column >
+                        <Label text="Auftrag" />
+                        <t:template>
+                            <Text text="{TableOne>Auftrag}" wrapping="false" />
+                        </t:template>
+                    </t:Column>
+                    <t:Column >
+                        <Label text="Sollmenge" />
+                        <t:template>
+                            <Text text="{TableOne>Sollmenge}" wrapping="false" />
+                        </t:template>
+                    </t:Column>
+                    <t:Column >
+                        <Label text="Verpackungstyp" />
+                        <t:template>
+                            <Text text="{TableOne>Verpackungstyp}" wrapping="false" />
+                        </t:template>
+                    </t:Column>
+                    <t:Column >
+                        <Label text="Kundenauftrag" />
+                        <t:template>
+                            <Text text="{TableOne>Kundenauftrag}" wrapping="false" />
+                        </t:template>
+                    </t:Column>
+                </t:columns>
+            </t:Table>
+        </content>
+    </Page>
+</mvc:View>

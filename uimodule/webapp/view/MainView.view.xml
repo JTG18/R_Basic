@@ -1,0 +1,7 @@
+<mvc:View controllerName="roehm.jt.mockup.mockup.controller.MainView" xmlns:mvc="sap.ui.core.mvc" displayBlock="true" xmlns="sap.m">
+    <Page id="page" title="Mockup start page">
+        <content>
+            <GenericTile class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout" header="Table Mockup"  press="onPress" />
+        </content>
+    </Page>
+</mvc:View>
